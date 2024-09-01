@@ -1,0 +1,21 @@
+derivedFields1
+{
+    // Mandatory entries (unmodifiable)
+    type            derivedFields;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    derived         (rhoU);
+
+    // Optional entries (runtime modifiable)
+    rhoRef          1.0;
+
+    // Optional (inherited) entries
+    region          region0;
+    enabled         true;
+    log             true;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    writeTime;
+    
+}

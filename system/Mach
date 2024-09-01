@@ -1,0 +1,9 @@
+MachNo1
+{
+    // Mandatory entries (unmodifiable)
+    type            MachNo;
+    libs            (fieldFunctionObjects);
+    writeControl    writeTime;  // Control how often the field is written
+    //writeInterval   1000;          // Write every time step
+
+}

@@ -1,0 +1,87 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    p
+    {
+        /*solver          GAMG;
+        minIter         0;
+        maxIter         1000;
+        tolerance       1e-08;
+        relTol          0.01;
+        smoother        GaussSeidel;*/
+        
+        solver          GAMG;
+        smoother        GaussSeidel;
+        tolerance       1e-6;
+        relTol          0.01;
+    }
+
+    "(rho|U|e|k|epsilon|omega|h)"
+    {
+        /*solver          smoothSolver;
+        minIter         0;
+        maxIter         1000;
+        tolerance       1e-08;
+        relTol          0.01;
+        smoother        symGaussSeidel;*/
+
+        solver          PBiCGStab;
+        preconditioner  DILU;
+        tolerance       1e-6;
+        relTol          0.1;
+    }
+}
+
+SIMPLE
+{
+    nNonOrthogonalCorrectors 0;
+    transonic       false;
+    consistent      false;
+    
+    pMax            2e5;
+    pMin            5e4;
+
+    residualControl
+    {
+        p               1e-4;
+        U               1e-5;
+        h               1e-6;
+        "(k|epsilon|omega)" 1e-4;
+    }
+}
+
+relaxationFactors
+{
+    fields
+    {
+        p               0.3;
+        rho             0.01;
+		//h                0.3;
+    }
+    equations
+    {
+        U               0.5;
+        h               0.4;
+        k               0.4;
+        epsilon         0.4;
+        omega           0.4;
+    }
+}
+
+
+// ************************************************************************* //

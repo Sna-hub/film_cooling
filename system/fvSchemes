@@ -1,0 +1,74 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSchemes;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+ddtSchemes
+{
+    default             steadyState;
+}
+
+gradSchemes
+{
+  // default             Gauss linear; 
+   default         cellLimited Gauss linear 1;
+}
+
+divSchemes
+{
+    default             none;
+
+   div(phi,U)       Gauss upwind;
+   //div(phi,U)         Gauss linearUpwind	grad(U);
+    
+    div(phi,h)       Gauss upwind;
+    //div(phi,h)         Gauss linearUpwind	grad(h);
+    
+    div(phi,K)      Gauss linear;
+
+    turbulence          Gauss upwind;
+    div(phi,k)          $turbulence;
+    div(phi,epsilon)    $turbulence;
+    iv(phi,omega)       $turbulence;
+
+    div(phid,p)         Gauss upwind;
+    div((phi|interpolate(rho)),p)  Gauss upwind;
+
+    div(((rho*nuEff)*dev2(T(grad(U)))))      Gauss linear;
+}
+
+laplacianSchemes
+{
+    //default         Gauss linear corrected;
+    default         Gauss linear orthogonal;
+}
+
+interpolationSchemes
+{
+    default         linear;
+}
+
+snGradSchemes
+{
+    //default         corrected;
+    default         orthogonal;
+}
+
+wallDist
+{
+    method          meshWave;   //needed for k-omega model
+}
+
+
+// ************************************************************************* //

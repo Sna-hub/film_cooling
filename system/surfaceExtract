@@ -1,0 +1,66 @@
+MainMassFlowRate
+{
+    // Mandatory entries (unmodifiable)
+    type            surfaceFieldValue;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    fields          (rhoU);
+    operation       average;
+    regionType      patch;
+    name            inlet_gas;
+
+    // Optional entries (runtime modifiable)
+    postOperation   mag;
+    weightField     alpha1;
+    scaleFactor     1.0;
+    writeArea       false;
+    surfaceFormat   none;
+
+    // Optional (inherited) entries
+    writeFields     true;
+    scalingFactor   1.0;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    timeStep;
+   
+}
+CoolantMassFlowRate
+{
+    // Mandatory entries (unmodifiable)
+    type            surfaceFieldValue;
+    libs            (fieldFunctionObjects);
+
+    // Mandatory entries (runtime modifiable)
+    fields          (rhoU);
+    operation       average;
+    regionType      patch;
+    name            inlet_coolant;
+
+    // Optional entries (runtime modifiable)
+    postOperation   mag;
+    weightField     alpha1;
+    scaleFactor     1.0;
+    writeArea       false;
+    surfaceFormat   none;
+
+    // Optional (inherited) entries
+    writeFields     true;
+    scalingFactor   1.0;
+    writePrecision  8;
+    writeToFile     true;
+    useUserTime     true;
+    region          region0;
+    enabled         true;
+    log             true;
+    executeControl  timeStep;
+    executeInterval 1;
+    writeControl    timeStep;
+   
+}
