@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      alphat;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+   MAIN_STREAM_FLOW_INLET
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+	MAIN_STREAM_FLOW_OUTLET
+    {
+        type            calculated;
+        value          uniform 0;
+    }
+	COOLANT_FLOW_INLET
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+	COOLANT_FLOW_OUTLET
+    {
+        type            calculated;
+        value          uniform 0;
+    }
+    MAINSTREAM_FLOW_SIDEWALL
+    {
+      type            compressible::alphatWallFunction;
+        Prt             0.85;
+        value           uniform 0;
+    }
+	TOP_WALL
+    {
+      type            compressible::alphatWallFunction;
+        Prt             0.85;
+        value           uniform 0;
+    }
+    PLATE
+    {
+        type            compressible::alphatWallFunction;
+        Prt             0.85;
+        value           uniform 0;
+    }
+	COOLING_CHANNEL_WALL
+    {
+        type            compressible::alphatWallFunction;
+        Prt             0.85;
+        value           uniform 0;
+    }
+	PLENUM_WALL
+    {
+        type            compressible::alphatWallFunction;
+        Prt             0.85;
+        value           uniform 0;
+    }
+}
+
+
+// ************************************************************************* //

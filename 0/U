@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform (8 0 0);
+
+boundaryField
+{
+     MAIN_STREAM_FLOW_INLET
+    {
+        type            pressureInletOutletVelocity;
+        phi             phi;
+        tangentialVelocity uniform (8 0 0);
+        value           uniform (8 0 0);
+    }
+	
+    MAIN_STREAM_FLOW_OUTLET
+	{
+	   type             zeroGradient;  //zeroGradient can be used also
+	   
+	
+	}
+	COOLANT_FLOW_INLET
+    {
+        type            pressureInletOutletVelocity;
+        phi             phi;
+        tangentialVelocity uniform (8 0 0);
+        value           uniform (8 0 0);
+    }
+	COOLANT_FLOW_OUTLET
+	{
+	   type             zeroGradient;  //zeroGradient can be used also
+	   
+	
+	}
+	MAINSTREAM_FLOW_SIDEWALL
+    {
+       type           noSlip;
+    }
+   TOP_WALL
+    {
+       type           noSlip;
+    }
+
+   PLATE
+    {
+        type            fixedValue;
+        value           uniform (0 0 0);
+    }
+
+    PLENUM_WALL
+    {
+        type            noSlip;
+    }
+	COOLING_CHANNEL_WALL
+    {
+        type            noSlip;
+    }
+}
+
+
+// ************************************************************************* //

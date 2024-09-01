@@ -1,0 +1,86 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      k;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -2 0 0 0 0];
+
+internalField   uniform 0.0036;
+
+boundaryField
+{
+  MAIN_STREAM_FLOW_INLET
+    {
+        type            turbulentIntensityKineticEnergyInlet;
+        intensity       0.015;
+        value         uniform 0.003632;
+
+	}
+	MAIN_STREAM_FLOW_OUTLET
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.003632;
+        value           uniform 0.003632;
+
+        
+    }
+  COOLANT_FLOW_INLET
+    {
+        type            turbulentIntensityKineticEnergyInlet;
+        intensity       0.01;
+        value           uniform 0.003632;
+
+    }	
+
+   
+	COOLANT_FLOW_OUTLET
+    {
+        type            inletOutlet;
+        inletValue      uniform 0.003632;
+        value           uniform 0.003632;
+
+        
+    }
+
+    MAINSTREAM_FLOW_SIDEWALL
+    {
+       type            kqRWallFunction;
+        value          uniform 0.0036;
+    }
+	TOP_WALL
+    {
+       type            kqRWallFunction;
+        value          uniform 0.0036;
+    }
+	PLATE
+    {
+        type            kqRWallFunction;
+        value          uniform 0.003632;
+    }
+	 COOLING_CHANNEL_WALL
+    {
+        type            kqRWallFunction;
+        value          uniform 0.0036;
+    }
+	PLENUM_WALL
+    {
+        type            kqRWallFunction;
+        value          uniform 0.0036;
+    }
+
+   
+}
+
+
+// ************************************************************************* //

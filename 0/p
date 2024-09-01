@@ -1,0 +1,76 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      p;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [1 -1 -2 0 0 0 0];
+
+internalField   uniform 101325;
+
+boundaryField
+{
+   MAIN_STREAM_FLOW_INLET
+    {
+        type            totalPressure;
+		p0              uniform 101325;   // Stagnation pressure from given March number
+		value           uniform 101325;   // guess value
+		// Optional entries
+        U               U;
+        phi             phi;
+        rho             rho;
+    }
+	 MAIN_STREAM_FLOW_OUTLET
+    {
+        type            fixedValue;
+        value           uniform 96950;
+    }
+	COOLANT_FLOW_INLET
+    {
+         type            totalPressure;
+		p0              uniform 109750;
+		value           uniform 101325;
+      
+       
+    }
+	COOLANT_FLOW_OUTLET
+    {
+        type            fixedValue;
+        value           uniform 96950;
+    }
+
+   MAINSTREAM_FLOW_SIDEWALL
+    {
+        type            zeroGradient;
+    }
+   TOP_WALL
+    {
+        type            zeroGradient;
+    }
+	PLATE
+    {
+        type            zeroGradient;
+    }
+	COOLING_CHANNEL_WALL
+    {
+        type            zeroGradient;
+    }
+	PLENUM_WALL
+    {
+        type            zeroGradient;
+    }
+}
+
+
+
+// ************************************************************************* //

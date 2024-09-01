@@ -1,0 +1,98 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+internalField   uniform 20;
+
+boundaryField
+{
+    MAIN_STREAM_FLOW_INLET
+    {
+         type            turbulentMixingLengthDissipationRateInlet;
+        mixingLength    0.0007;     // calculated ls= 7% of hydraulic dia = 0.07* Width of flate plate
+        value           uniform 20;
+
+    }
+	 MAIN_STREAM_FLOW_OUTLET
+    {
+        type          zeroGradient;
+    }
+    COOLANT_FLOW_INLET
+    {
+        type            turbulentMixingLengthDissipationRateInlet;
+        mixingLength    0.00014;
+        value           uniform 20;
+    }
+	COOLANT_FLOW_OUTLET
+    {
+        type          zeroGradient;
+    }
+
+    MAINSTREAM_FLOW_SIDEWALL
+    {
+        type            epsilonWallFunction;
+	
+        value          uniform 10;
+		Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+    }
+   TOP_WALL
+    {
+        type            epsilonWallFunction;
+		
+        value          uniform 10;
+		Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+
+    }
+    PLATE
+    {
+        type            epsilonWallFunction;
+		
+        value          uniform 10;
+		Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+
+    }
+	
+    COOLING_CHANNEL_WALL
+    {
+        type            epsilonWallFunction;
+	
+        value          uniform 10;
+		Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+
+    }
+
+   PLENUM_WALL
+    {
+        type            epsilonWallFunction;
+	
+        value          uniform 10;
+		Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+
+    }
+}
+
+// ************************************************************************* //
